@@ -3,6 +3,23 @@
 > Written for bufnita, by bufnita's tutor. Every term from Phase 0 so far,
 > explained simply, with examples you can actually run.
 > **Rule of this file:** no word appears that is not itself explained.
+>
+> **Paste-safety legend** (used in EVERY lesson chat message from now on):
+> - 🟢 **PASTE EXACTLY AS-IS** — the text is a finished, runnable command. No
+>   placeholders inside. Paste → Enter → expected output is stated.
+> - 🟡 **COPY, BUT EDIT FIRST** — the text contains a placeholder you MUST
+>   replace (like `YOUR_NAME`, `PASTE_YOUR_NEW_KEY`, `file.txt`). Typing it
+>   as-is = error 400-class shame for us both 🙂
+> - 🔴 **DO NOT PASTE INTO THE TERMINAL** — this block is OUTPUT or EXAMPLE
+>   text, shown for reading only (like `git log` results or expected prints).
+>   Pasting output text into a prompt is what caused the
+>   "Enumerating: command not found" comedy 😄
+> - 🗣️ **NO TERMINAL AT ALL** — browser clicks, settings pages, things to
+>   read/decide (not terminal work).
+>
+> Why this legend exists: most beginner pain is not "wrong commands" — it's
+> pasting the WRONG KIND of thing (decoration, output, templates with
+> placeholders). This legend makes the risk explicit every time.
 
 ---
 
