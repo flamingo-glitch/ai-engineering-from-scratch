@@ -2,3 +2,4 @@
 *.pth
 *.safetensors
 .env
+.ipynb_checkpoints/
