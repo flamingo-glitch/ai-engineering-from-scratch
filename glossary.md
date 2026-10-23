@@ -20,6 +20,14 @@
 > Why this legend exists: most beginner pain is not "wrong commands" — it's
 > pasting the WRONG KIND of thing (decoration, output, templates with
 > placeholders). This legend makes the risk explicit every time.
+>
+> **DOUBLE-ENTRY LAW** (Oct 23 2026, requested by bufnita — in force forever):
+> every command from now on comes with TWO siblings:
+> - **A) 🟢 paste-as-is** — the copy-paste machine. Zero edits needed.
+> - **B) 🧠 anatomy** — the same command dissected: every character, every
+>   symbol, every word explained so it feels like a sentence, not a spell.
+> Reading B is how "typing commands I found somewhere" becomes
+> "writing commands I understand".
 
 ---
 
@@ -307,15 +315,125 @@ You (code)                          AI provider (their server)
 
 ---
 
-## 8. Words you'll meet NEXT (Lesson 05+: Jupyter) — preview
+## 8. Lesson 05 — the Jupyter lab (lived Oct 23 2026, 5/12 ✅)
 
-| Term | Plain meaning |
+Words we LIVED today, not just previewed:
+
+| Term | Plain meaning | Lived proof |
+|---|---|---|
+| **JupyterLab** | the lab bench in your browser: code boxes + writing boxes + a hidden brain | the page the Launcher opened |
+| **notebook file (.ipynb)** | IPython Notebook file — internally a JSON (JavaScript Object Notation) text file listing every box, its code and outputs | `my_first_notebook.ipynb` |
+| **cell / box** | one small unit: a code box DOES, a text box EXPLAINS | our 7 boxes |
+| **kernel** | the background Python brain-process behind the page (`ipykernel` = IPython kernel) | the top-right circle: white = idle, orange = busy |
+| **Shift + Enter** | run this box and select the next one | the drumbeat 🥁 |
+| **In [n]** | the run counter — how many times, in what order, boxes have run | the betrayal meter |
+| **localhost** | "this very machine" — a website living on your own computer, not the internet | `localhost:8888` |
+| **port** | a numbered door on your machine; Jupyter serves through its own door | `:8888` |
+| **Markdown** | writing-with-formatting-code: `#` = big title, `##` = smaller, `**word**` = bold | "My Lab Notebook — Day 1" |
+| **¶ (pilcrow)** | hover-anchor shown next to headings for linking; display-only decor | it appeared by your title |
+| **magic command** | an order for the notebook itself (Python doesn't know these); starts with `%` | `%timeit` |
+| **ms / μs / ns** | thousandth / millionth / billionth of a second (μ = Greek "mu") | 25.9 ms → 443 μs |
+| **± (plus-minus)** | the wobble: how much repeated measurements differed from the mean | ± 15.8 μs |
+| **vectorization** | hand the whole grid to NumPy in ONE gulp instead of looping yourself | the 58× speedup we measured |
+| **np.int64** | NumPy's labeled whole number: 64 bits of storage width (bit = the 1/0 unit) | `np.int64(14)` |
+| **out-of-order execution** | cells run in CLICK order, not PAGE order | the 200! |
+| **hidden state** | the kernel remembers everything ever run, invisibly — even old boxes' answers change later | `mystery` 5 → 100 |
+| **restart + Run All Cells** | kill the brain, wipe memory (RAM), replay the page as a clean script | the ⟳ ceremony |
+| **.ipynb_checkpoints/** | Jupyter's autosave shadow-copies folder — belongs on git's no-photo list | now in `.gitignore` |
+
+**The two truths (the lesson's core discovery):**
+
+| How the page ran | Old box 2 answered | Trustworthy? |
+|---|---|---|
+| click-order (remix) | 200 | ❌ no — history scrambled |
+| page-order (restart → run all) | 10 | ✅ yes — behaves like a script |
+
+**The workflow law from the course:** *explore in notebooks, ship in scripts* — notebooks are scratch paper for discovery; finished work moves into `.py` files.
+
+---
+
+## 8½. Command anatomy — every character on trial (the Double-Entry Law, demonstrated)
+
+### The punctuation zoo (every glyph that ever scared us)
+
+| Character | Name | Plain meaning | Example |
+|---|---|---|---|
+| (space) | space | separates arguments; one space = one boundary | `git add file` |
+| `.` | dot | 1) hidden-file prefix · 2) current folder · 3) Python's "reach inside" | `.env`, `np.dot` |
+| `/` | slash | folder separator | `.venv/bin/activate` |
+| `-` / `--` | dash, double-dash | tool options (flags) | `-n 5`, `--global` |
+| `" "` | double quotes | make chunk/symbols one text piece — ⚠️ a `!` inside = bash history-expansion landmine ("event not found") | `"Lesson 05: ..."` |
+| `' '` | single quotes | same, but NOTHING expands inside (safer around `!` and `$`) | |
+| `>` | send-into | write output to a file, OVERWRITING it | `echo hi > f.txt` |
+| `>>` | append-into | write output at the END of the file (what journals use) | `echo ... >> lesson-log.md` |
+| `&&` | and-then | run the next command ONLY if the previous succeeded | the commit chain |
+| `\|` | pipe | feed the left command's output into the right one | `git log \| head -5` |
+| `$()` | command substitution | run the inner command, paste its RESULT here | `$(date +%F)` |
+| `~` | tilde | "my home folder" (`/home/bufnita`) | `cd ~` |
+| `%` | percent (Jupyter) | magic-command prefix | `%timeit` |
+| `[ ]` | brackets (Python) | build a list | `[n*n for n in range(3)]` |
+| `( )` | parentheses | 1) call a function with arguments · 2) pasted into bash = subshell syntax error | `np.dot(a, a)` |
+| `**` | double star | 1) Python power: `x ** 2` = x² · 2) Markdown bold | |
+| `_` | underscore in numbers | eye-friendly counting: `1_000_000` = 1000000 | |
+| `±` | plus-minus | measurement wobble | `443 μs ± 15.8 μs` |
+
+### Worked double-entries (real commands of this course)
+
+**A) 🟢 paste-as-is**
+```bash
+echo ".ipynb_checkpoints/" >> .gitignore
+```
+**B) 🧠 anatomy**
+
+| Piece | Meaning |
 |---|---|
-| **notebook (.ipynb)** | an interactive lab-notebook file: cells of code + text |
-| **cell** | one small box holding code OR explanation; run one at a time |
-| **kernel** | the "brain process" that actually runs the cells (a Python inside the sandbox) |
-| **localhost / port** | the notebook serves a mini-website on YOUR machine: `http://localhost:8888` |
-| **Markdown** | the language of text-cells: `# Title`, `**bold**`, lists — writing that LOOKS like writing |
+| `echo` | bash verb: "print the following text" |
+| `".ipynb_checkpoints/"` | the text — quotes make it ONE chunk, spaces/symbols safe inside |
+| `>>` | redirect-APPEND: write the text at the end of the target file (a single `>` would overwrite!) |
+| `.gitignore` | target file (leading dot = hidden; name = "git ignore", the no-photo list) |
+
+**A) 🟢 paste-as-is**
+```bash
+git add .gitignore my_first_notebook.ipynb lesson-log.md && git commit -m "Lesson 05: first notebook (cells, plot, magics, trap caught)" && git push
+```
+**B) 🧠 anatomy**
+
+| Piece | Meaning |
+|---|---|
+| `git` | the version-control tool itself |
+| `add` | stage: put the named files on the photography desk |
+| (many names) | git accepts multiple files in one line |
+| `&&` | "and-then, only if it worked" |
+| `commit` | glue a snapshot into history |
+| `-m` | flag: "the next quoted text = my caption" |
+| `"Lesson 05: ..."` | the caption itself |
+| `push` | upload the new history to GitHub (origin) |
+
+**A) 🟢 paste-as-is**
+```bash
+source .venv/bin/activate
+```
+**B) 🧠 anatomy**
+
+| Piece | Meaning |
+|---|---|
+| `source` | run a script INSIDE the current shell (a fresh copy would forget it immediately) — that's why the badge stays on |
+| `.venv` | the sandbox folder (leading dot = hidden) |
+| `bin` | bin = **binaries** — the folder where executable programs live |
+| `activate` | the script that switches your Python to the sandbox |
+
+**A) 🟢 paste-as-is**
+```bash
+uv pip install jupyterlab
+```
+**B) 🧠 anatomy**
+
+| Piece | Meaning |
+|---|---|
+| `uv` | our turbo installer (also manages Pythons and sandboxes) |
+| `pip` | Python's classic package-installer command; uv speaks its language |
+| `install` | the verb: "fetch and set up" |
+| `jupyterlab` | the package name (package names: lowercase, no spaces) |
 
 ---
 
@@ -348,8 +466,9 @@ When something shows red, ask in order:
 - the benchmark → CPU vs GPU measured *honestly* (2–3×, and why)
 - `first_api_call.py` → a REAL LLM answered YOUR question at $0
 - `.gitignore` + `git check-ignore -v .env` → your key is GUARDED
+- `my_first_notebook.ipynb` → cells ran, parabola drew, 25.9 ms vs 443 μs measured, the 200→10 betrayal caught, restart healed it
 
 ---
 
-*Created Oct 2026 — Phase 0, 4/12 lessons complete. Keep appending!
-TODO: add the Lesson 05 (Jupyter) words right after you live them.*
+*Created Oct 2026 — Phase 0, 5/12 lessons complete. Keep appending!
+Lesson 05 (Jupyter) lived and documented Oct 23 2026. Next: Lesson 06.*
