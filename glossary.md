@@ -437,6 +437,28 @@ uv pip install jupyterlab
 
 ---
 
+## 8¾. Lesson 06 — Python environments & lockfiles (lived Oct 24 2026, 6/12 ✅)
+
+| Term | Plain meaning | Lived proof |
+|---|---|---|
+| **dependency** | a library your project needs to work | numpy, pandas, requests |
+| **dependency hell** | two projects fight over ONE shared Python's library versions | the lesson's villain |
+| **transitive dependency** | a dependency of a dependency | invited 2 guests, 7 packages arrived (scipy, joblib etc. = luggage) |
+| **version pin `==`** | "EXACTLY this version" — no drifting | `uv pip install "numpy==1.26.4"` |
+| **isolation** | sandboxes don't share toys | lab-two answered 1.26.4, home answered 2.5.4 — same command |
+| **pyproject.toml** | the project's ID card: name, version, required Python, shopping list | demo-project's card |
+| **TOML** | simple config format: `[section]` headers + `key = "value"` | the card's language |
+| **lockfile (uv.lock)** | the receipt: every package AND its luggage pinned to exact barcodes | `Resolved 7 packages in 323ms` |
+| **reproducibility** | same receipt → identical setup on any machine, every time | what hashing makes possible |
+| **wheel (.whl)** | pre-built ready-to-run package for one machine species | the long `wheels = [...]` lists |
+| **sdist** | source distribution: raw code, build-it-yourself option | also recorded in the receipt |
+| **sha256 hash** | the file's fingerprint — changes if even 1 bit changes (tamper-proofing) | `hash = "sha256:..."` everywhere |
+| **cp312** | "built for CPython 3.12" — our Python species | stamp inside wheel names |
+| **per-phase env strategy** | different course phases may need conflicting libs → separate sandboxes per phase | course plan for Phases 4+ |
+| **badge ≠ folder** | the `(badge)` follows activation, not directory location | repo badge seen inside demo-project |
+
+---
+
 ## 9. Error-reading cheat sheet (the debugging instinct)
 
 When something shows red, ask in order:
@@ -470,5 +492,5 @@ When something shows red, ask in order:
 
 ---
 
-*Created Oct 2026 — Phase 0, 5/12 lessons complete. Keep appending!
-Lesson 05 (Jupyter) lived and documented Oct 23 2026. Next: Lesson 06.*
+*Created Oct 2026 — Phase 0, 6/12 lessons complete. Keep appending!
+Lessons 05 & 06 lived and documented (Jupyter Oct 23, environments Oct 24). Next: Lesson 07 — Docker for AI.*
