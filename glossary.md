@@ -459,6 +459,37 @@ uv pip install jupyterlab
 
 ---
 
+## 8⅞. Lesson 07 — Docker (lived Nov 10 2026, 7/12 ✅)
+
+| Term | Plain meaning | Lived proof |
+|---|---|---|
+| **Docker** | tool that seals a whole computer (OS bits + code + libraries) into a portable box | engine 29.9.3 inside WSL Ubuntu |
+| **image** | a built, frozen template — a prefab house, shrink-wrapped | `my-ai-slim`, `hello-world` |
+| **container** | a running instance of an image — the house inhabited & warm | `Hello from Docker!` |
+| **Dockerfile** | the recipe text: FROM/WORKDIR/RUN/CMD layer by layer | our 6-line file in `~/docker-lab` |
+| **layer** | each instruction stamps one layer; unchanged layers are CACHED (rebuilds fast) | `=> [1/3] FROM… [2/3] WORKDIR… [3/3] RUN…` |
+| **Docker Hub** | the app store of images (`library/` = the official shelf) | `Pulling from library/hello-world` |
+| **pull** | fetching an image (or base layer) to local storage | `4f55086f7dd0: Pull complete` |
+| **digest / sha256** | the byte-fingerprint — same barcode culture as `uv.lock` | `Digest: sha256:c567…` |
+| **tag (`-t`)** | give a built image a name | `-t my-ai-slim` |
+| **build context (`.`)** | the folder whose files the build ships to the engine | `docker build -t my-ai-slim .` |
+| **`--rm`** | auto-delete the container when it exits — no zombie houses | our every run |
+| **`-it`** | interactive + tty: a live `>>>` INSIDE the box | we played numpy inside |
+| **`-v HOST:CONTAINER`** | volume mount — weld a garage door from your disk into the container | `-v ~/ai-engineering-from-scratch:/data` |
+| **`CMD ["python"]`** | the default spawn command (overridden when run-args are given) | our tail line |
+| **port mapping (`-p`)** | connect container door to host door (`-p 8888:8888`) — the course's jupyter-in-container trick | (previewed,_course Step 4) |
+| **docker.sock permission** | the engine's door-file; belongs to root:docker group | our `permission denied` night |
+| **`getent group docker`** | read the DISK truth of club membership (independent of sessions) | `docker:x:989:bufnita` |
+| **two clocks** | `groups` = session-held copy (refreshes at login) vs disk registry (instant) | the diagnosis of our permission night |
+| **`df -h`** | disk-free in human sizes | `Avail 948G` = hangar! |
+| **version seal** | container's Python 3.12.**16** vs host 3.12.**15** — separate builds prove the seal | our interactive box |
+| **unpinned drift** | `pip install numpy` without `==` = "newest today" — tomorrow differs | 2.5.4 now; pin like the course's `torch==2.6.0+cu124` |
+| **three rooms** | `$` = bash · `In [ ]` = notebook · `>>>` = bare Python — each door rejects foreign speech | our SyntaxError night 😄 |
+
+*Deferred on purpose: full CUDA whale image (disk was never the issue — 948G! — download-time was), `docker compose` multi-service village, `nvidia-container-toolkit` GPU passthrough. These return when we reach phases that need them.*
+
+---
+
 ## 9. Error-reading cheat sheet (the debugging instinct)
 
 When something shows red, ask in order:
@@ -492,5 +523,5 @@ When something shows red, ask in order:
 
 ---
 
-*Created Oct 2026 — Phase 0, 6/12 lessons complete. Keep appending!
-Lessons 05 & 06 lived and documented (Jupyter Oct 23, environments Oct 24). Next: Lesson 07 — Docker for AI.*
+*Created Oct 2026 — Phase 0, 7/12 lessons complete. Keep appending!
+Lessons 05–07 lived and documented (Jupyter Oct 23 · environments Oct 24 · Docker Nov 10). Next: Lesson 08 — Editor setup.*

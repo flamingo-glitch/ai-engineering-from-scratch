@@ -240,6 +240,12 @@ git check-ignore -v .env
 | `check-ignore` | ask: "is this name ignored?" |
 | `-v` | verbose: show WHICH RULE protects it (print nothing = NOT protected — the hole-finder!) |
 
+**DEEP-DIVE (for the version that lives in your sleep):**
+- the cast: git = the photographer who snapshots everything · `.env` = the secret password file that must never be photographed · `.gitignore` = a plain-text list of never-photograph names (one rule per line).
+- command ⅰ bends a speaker: `echo` repeats text (useless alone) → `>>` redirects it "not to screen — into a file, appended at the END, erase nothing" → lands as a NEW RULE LINE in `.gitignore`. `>` would instead ERASE the whole file first — the butcher arrow 💀.
+- command ⅱ shakes the lock: `check-ignore` = question machine ("does a rule catch this name?"); `-v` shows the receipt (list file : line : rule). Silence = NO rule = the scary verdict — this is the alarm that caught our unprotected `.env` weeks ago.
+- their specific line-as-read: `echo ".env"` speaks the text; `>> .gitignore` files it as the last rule; `git check-ignore -v .env` demands proof the rule latched.
+
 ---
 
 ## 3. LESSON 03 — GPU & CUDA (the graphics card becomes a math device)
@@ -566,6 +572,108 @@ Everything above is ONE of those verbs with its anatomy.
 
 ---
 
+## 11. LESSON 07 — Docker (lived Nov 10 2026)
+
+### 11.1 install & membership (the two-clocks night)
+
+### A) 🟢 paste-as-is (shape)
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+getent group docker
+groups
+```
+### B) 🧠 anatomy
+| Piece | Meaning |
+|---|---|
+| (line 1) | the official install script — same shape as Lesson 01's uv installer (`-fsSL` fetch, `\| sh` execute; narrates each apt move with `+ sudo -E sh -c …`) |
+| `usermod -aG docker $USER` | append your user to the docker club (group CREATED by the install — usermod before install fails loudly but harmlessly) |
+| `getent group docker` | the DISK truth: `docker:x:989:bufnita` — membership saved, independent of sessions |
+| `groups` | the SESSION's held copy — refreshes only at login (`wsl --shutdown` + reopen = the rebirth) |
+
+**The two-clocks law: usermod writes disk instantly; your session holds old clubs until reborn. Between those worlds live the bypasses: `sudo` (master key, works today) or a fresh login (permanent cure).**
+
+### 11.2 the engine's vitals
+
+### A) 🟢 paste-as-is
+```bash
+docker --version
+sudo docker run hello-world
+df -h ~
+```
+### B) 🧠 anatomy
+| Piece | Meaning |
+|---|---|
+| `--version` | client's business card (server answered separately in install log: `Server: Docker Engine 29.9.3`) |
+| `run hello-world` | first container: pull → digest-fingerprint → four-step daemon dance (client→pull→container→stream) |
+| `df -h ~` | disk-free, human sizes; `Avail` column = floor space for prefab houses |
+
+### 11.3 the recipe (Dockerfile) → image → container
+
+### A) 🟢 paste-as-is
+```bash
+cd ~ && mkdir docker-lab && cd docker-lab
+cat > Dockerfile << 'EOF'
+FROM python:3.12-slim
+
+WORKDIR /work
+
+RUN pip install --no-cache-dir numpy matplotlib
+
+CMD ["python"]
+EOF
+
+sudo docker build -t my-ai-slim .
+sudo docker run --rm my-ai-slim python -c "import numpy; print(numpy.__version__)"
+```
+### B) 🧠 anatomy
+| Piece | Meaning |
+|---|---|
+| `FROM python:3.12-slim` | base prefab — `-slim` = trimmed class (~150 MB; the whale class is `nvidia/cuda…-devel` ~4 GB, same grammar) |
+| `WORKDIR /work` | container's default folder |
+| `RUN …` | execute during BUILD (stamps a layer) |
+| `--no-cache-dir` | pip clears its download junk → smaller image |
+| `CMD ["python"]` | default spawn command — JSON-array dialect |
+| `docker build -t my-ai-slim .` | `-t` = tag name; `.` = build context (current folder ships to engine) |
+| (run line) | `--rm` = dissolve-after-exit; trailing command REPLACES `CMD` |
+
+**Pin law discovered live:** unpinned `pip install numpy` = "newest today"; serious recipes pin (`torch==2.6.0+cu124`, digests) — locks don't drift.
+
+### 11.4 interactive + the garage door
+
+### A) 🟢 paste-as-is
+```bash
+sudo docker run --rm -it my-ai-slim
+```
+*expected: `>>>` — a DIFFERENT Python inside (our box: 3.12.16 vs host 3.12.15 = seal proven in version numbers). `exit()` or Ctrl+D leaves;* `docker ps -a` *confirms no zombie remains.*
+
+### A) 🟢 paste-as-is (the door)
+```bash
+sudo docker run --rm -v ~/ai-engineering-from-scratch:/data my-ai-slim python -c "print(open('/data/glossary.md').read(160))"
+```
+### B) 🧠 anatomy
+| Piece | Meaning |
+|---|---|
+| `-v HOST:CONTAINER` | volume mount, colon-delimited — weld garage door from host disk into the box (`~` expands in the HOST shell first) |
+| `python -c "print(open('/data/glossary.md')…)"` | inside the box: read through the doorway — your dictionary, printed by a sealed stranger-computer 🥹 |
+
+### 11.5 the three-rooms law (earned the hard way 😄)
+
+| Prompt | Room | Speaks |
+|---|---|---|
+| `bufnita@…$` | Ubuntu terminal | bash (`sudo docker …`) |
+| `In [ ]` | Jupyter page | notebook Python + magic |
+| `>>>` | bare interpreter | Python ONLY — `sudo` here = SyntaxError with `^^^^^^` blame |
+
+### 11.6 status shelf
+| Command | Shows |
+|---|---|
+| `docker ps` | running containers |
+| `docker ps -a` | even the dead ones |
+| `docker images` | frozen prefabs + sizes |
+| `docker system prune -a` | reclaim disk (careful — deletes unused images) |
+
+---
+
 *BUILT Oct 24 2026 — Lessons 01–06, every command owned.*
-*Companion files: `glossary.md` (the WORDS) · `lesson-log.md` (the DATES).*
-*Next sections nest here as lessons land: Lesson 07 (Docker) will append its own anatomy box.* 🦉
+*Lesson 07's anatomy nested Nov 10 2026. Companion files: `glossary.md` (the WORDS) · `lesson-log.md` (the DATES).*

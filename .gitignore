@@ -3,3 +3,4 @@
 *.safetensors
 .env
 .ipynb_checkpoints/
+.env
